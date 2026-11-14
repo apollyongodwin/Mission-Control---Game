@@ -9,7 +9,7 @@ Mission Control is made by:
 - Yohann P. Domingo
 - Klyne Xyril M. Africano
 - Julliana Arlyn A. Virtudazo
-- Noril Saint O. Encabo
+- Noril Agustin O. Encabo
 
 ### Very Special Mentions
 - **Rihanna Elisse C. Sani**: the character designs were commissioned from and created by her.
