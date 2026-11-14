@@ -1,16 +1,22 @@
-# Godot 4+ specific ignores
+# Godot 4: the editor's cache (rebuilt on import). Keep *.import files and export_presets.cfg in the repo.
 .godot/
-.nomedia
 
-# Godot-specific ignores
-.import/
-export.cfg
-export_credentials.cfg
+# Builds: too big for git (the Windows .exe is over GitHub's 100 MB limit). Put them in a GitHub Release.
+/build/
+/export/
+*.exe
+*.pck
+*.zip
 
-# Imported translations (automatically generated from CSV files)
-*.translation
+# Local mods for testing (share mods as files in a release or a separate repo)
+/mods/
 
-# Mono-specific ignores
-.mono/
-data_*/
-mono_crash.*.json
+# OS and editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+__pycache__/
+*.pyc
+.vscode/
+.idea/

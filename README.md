@@ -1,102 +1,165 @@
-# MISSION CONTROL
+# Mission Control
 
 **Every real spacecraft is a negotiation. Here is one you can play.**
 
-Mission Control (formerly COUNTDOWN) is a cooperative 4-player LAN game about designing a space mission. Four players sit at four laptops
-(FLIGHT, SYSTEMS, PAYLOAD, GROUND). Each sees only part of the numbers, so they have to talk to make one spacecraft fit
-one rocket and one budget. Then they launch it and survive crises using the spare margins they built in.
-A fifth screen, **Mission Control**, shows the whole thing like a live broadcast.
+Mission Control is a cooperative LAN game about designing and flying a space mission, made by **Team Pawstronauts**
+for the **NASA Space Apps Challenge 2026**. Four crew members each build part of one spacecraft; a fifth player,
+the **Commander**, holds the handbook. Nobody can win alone: the crew has the ship, the Commander has the answers,
+and the only way through is to talk.
 
-Team **Pawstronauts**, NASA Space Apps Challenge 2026.
+> Built with **Godot 4.7 (stable)**. Kid-friendly: start on **Cadet** with **Bagyo Watch**.
 
-## New in MC-9.0
-- Every crew screen shows the **mission goals** (how full each one is, in our orbit) and the **whole team's picks**.
-  Orbit cards say what each orbit sees; instrument cards say how much they help in the chosen orbit.
-- Science is fairer: a good design now reaches about 75-80.
-- Crew screens fit: one decision per page, cards in one row with arrows, nothing cut off.
-- AI use is noted everywhere: see **Credits & AI use** and `AI_DISCLOSURE.md`.
+---
 
-## New in MC-8.0
-- **Lives:** Cadet 3, Engineer 2, Flight Director 1. A crisis mistake (a card that doesn't help, or blocking less than
-  half) costs one. No lives left = the mission is called off.
-- **Mini-tasks:** surprise tasks for everyone, and a task for whoever taps CHIP IN on a lucky chance (asteroids, wiring,
-  binary, antenna tracing). Each finished task earns a token.
-- **Mission twists:** one surprise rule per game (lobby switch). **Build time** is chosen in the lobby.
-- **The budget depends on the orbit.** Overtime costs money AND FLIGHT's time tokens.
-- **The Commander's screen says exactly what to swap and why**, plus a science forecast. The handbook has new
-  Ground stations, Science and Tips pages.
-- **Real orbits** on the broadcast: Kepler timing, a spinning tilted Earth, geostationary parked over the Philippines.
-- **Mods:** add your own parts, instruments, crises and twists. See `MODDING.md` and `modding/example_mod.json`.
-- The game version is shown at the bottom of every screen.
+## Contents
+- [What it is](#what-it-is)
+- [Download and play](#download-and-play)
+- [Playing over a LAN](#playing-over-a-lan)
+- [Run from source](#run-from-source)
+- [Project layout](#project-layout)
+- [Tests](#tests)
+- [Mods](#mods)
+- [Documentation](#documentation)
+- [Credits and AI use](#credits-and-ai-use)
+- [License](#license)
 
-## Mods
-Put mod `.json` files in a folder called `mods` next to `MissionControl.exe` (or Settings > Mods), then restart.
-Every laptop must have the same mods, or Mission Control refuses to connect. How to write one: `MODDING.md`.
+---
 
-## Run it
+## What it is
 
-1. Install **Godot 4.7 stable** (the whole team must use the same version).
-2. Open `project.godot` in Godot and press **F5**.
-3. One laptop presses **Host Mission Control**. The others press **Join as Crew**, pick the game from the list
-   (or type the address shown on Mission Control), choose a seat and press READY.
-4. Mission Control presses **INITIATE LAUNCH**. Empty seats are flown by AutoCrew bots, so 1 to 4 players all work.
+| Seat | Who | Picks |
+|---|---|---|
+| **FLIGHT** | Flight Director | orbit, engines, pointing |
+| **SYSTEMS** | Spacecraft Engineer | body, solar wings, battery, computer, shielding |
+| **PAYLOAD** | Science Lead | the instruments that do the mission's job |
+| **GROUND** | Operations and Budget | rocket, antenna, ground stations |
+| **COMMANDER** | the host laptop | sees the budget, the ship's health and the handbook |
 
-Start with **Bagyo Watch** on **Cadet**.
+**A mission:** read the briefing, then build the ship against the clock. Everyone votes GO or NO-GO, and you
+launch. In flight, crises hit: each crew member reads their gauges to the Commander, the Commander finds the
+crisis in the handbook and says which cards to play, and the crew spends **tokens** (the spare power, fuel, money
+and time they built in) to save the ship. The debrief shows a score, a grade, medals, who used your data and
+a mission patch.
 
-### Testing on one laptop
-Debug > Customize Run Instances: enable multiple instances (5) and give them these arguments:
-`--host` for one, and `--auto-join=127.0.0.1 --role=flight` (or `systems`, `payload`, `ground`) for the others.
-Host extras: `--scenario=moon_relay --difficulty=engineer --length=full --demo --autostart=5`.
+**What makes it different**
+- **Asymmetric information** (inspired by *Keep Talking and Nobody Explodes*): the crew can't see if their picks are
+  right; the Commander can, but can't see the gauges. You have to talk.
+- **Margins become tokens:** the spare room you design in is what you spend to survive crises.
+- **Real stories:** *Bagyo Watch* is a typhoon and flood satellite for the Philippines; *Moon Relay* serves the lunar
+  south pole; *Deep Probe* goes to Jupiter. Orbits are drawn as real Kepler orbits.
+- **Every failure explains itself:** the debrief says what limited the mission and why.
+- **Variety:** lives, surprise mini-tasks, a random mission twist each game, three difficulties, and mods.
 
-### LAN tips
-Port **7777** (game) and **7778** (finding games). Venue wifi often blocks laptop-to-laptop traffic, so bring a travel
-router or phone hotspot. Allow Godot through the Windows firewall the first time.
+The full player guide is in **[docs/HOW_TO_PLAY.md](docs/HOW_TO_PLAY.md)**.
 
-## How a mission goes
-Lobby > Briefing (your secret goal) > Design (pick parts; the coach bubble tells you the one next thing to fix) >
-Design Review (everyone answers GO or NO-GO) > Launch > Flight (crises: play cards, hand tokens to teammates) >
-Debrief (grade, medals, who used your data, mission patch). Then press **Again!**
+## Download and play
 
-## Chat
-Press **T** (or the CHAT tab) on a crew laptop. Quick phrases always work; Mission Control can switch to
-"quick phrases only" in the lobby. Chat is muted during Radio Silence crises: use the ping wheel.
+1. Go to **[Releases](../../releases)** and download `MissionControl_Windows.zip` (Windows 10/11, 64-bit).
+2. Unzip it on **every** laptop. Everyone must run the **same release**; a different copy is refused when it tries to connect.
+3. Print `Commander_Handbook.pdf` for the Commander (optional: the handbook is also in the game).
+4. On the host laptop: **Host a Mission**. On the crew laptops: **Join as Crew**, pick a seat, press **READY**.
+5. The host presses **INITIATE LAUNCH**. Empty seats are flown by AutoCrew bots, so 1 to 4 crew all work.
+
+**First launch on Windows:** if SmartScreen says *Windows protected your PC*, click **More info > Run anyway** (the
+game isn't code-signed). When the firewall asks, allow **Private networks**.
+
+## Playing over a LAN
+
+- All laptops on the **same Wi-Fi**, set to **Private** (Settings > Network & internet > Wi-Fi > your network).
+- The game uses **UDP ports 7777** (game) and **7778** (finding games on the network).
+- School or venue Wi-Fi often blocks laptops from talking to each other. A **phone hotspot or travel router** fixes it.
+- If a crew laptop can't see the host, type the address shown in the host's lobby. *Crew can't connect?* in the lobby
+  lists more tips, and **Settings > System check** makes a report you can send to the Lead.
+- No network at all? Run the host and crew windows on one laptop (see below).
+
+## Run from source
+
+1. Install **Godot 4.7 stable** (the exact version: other versions are refused by the version check).
+2. Clone this repository and open `project.godot` in Godot (**Import**).
+3. Press **F5**.
+
+**Testing on one laptop:** *Debug > Customize Run Instances*, enable 5 instances and give them these arguments:
+
+| Instance | Arguments |
+|---|---|
+| 1 (host) | `--host` |
+| 2 to 5 (crew) | `--auto-join=127.0.0.1 --role=flight` (or `systems`, `payload`, `ground`) |
+
+Host extras: `--scenario=moon_relay --difficulty=engineer --length=full --build=180 --demo --no-twists --autostart=10`.
+Add `--no-mods` to ignore mods.
+
+**Export a Windows build:** install the Godot 4.7 export templates, then
+`godot --headless --export-release "Windows Desktop" build/windows/MissionControl.exe`.
+Upload the build to a GitHub Release (the `build/` folder is not committed: the .exe is over GitHub's 100 MB limit).
+
+## Project layout
+
+```
+autoload/      Data, MissionState, Net, Audio (the only four autoloads)
+sim/           SimEngine (design maths), FlightDirector (crises), BotCrew, ShipDoctor (advice), ReportFormat
+net/           PhaseMachine (host-side game flow), Protocol, Discovery (LAN beacon), NetInfo
+ui/menu/       main menu, lobby, settings, past missions
+ui/roles/      the four crew panels
+ui/main/       host and crew screens, the Commander console and handbook
+ui/broadcast/  the big Mission Control screen: ship, orbit view, ticker, announcer
+ui/common/     shared pieces: cards, crisis panel, mini-tasks, lives, chat, theme
+ui/debrief/    debrief, mission patch, saved missions
+data/          countdown_data.json (every number and text), kid_text.json, credits.json
+handbook/      the Commander's Handbook (PDF + its source data)
+modding/       an example mod
+tools/         handbook, sound and medal generators
+tests/         automated tests and screenshot helpers
+docs/          player guide, architecture, history
+```
+
+More detail: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
 ## Tests
-See `MERGE_NOTES.md` for the full list. Quick checks:
-`godot --headless -s res://tests/golden_test.gd` and `godot --headless -s res://tests/load_all_test.gd`.
 
-## Data and credits
-All numbers are game-scale and only loosely inspired by real missions (see `real_analog` in `data/countdown_data.json`).
-They are **not** official NASA data.
+Run from the project folder (`godot` = your Godot 4.7 executable):
 
-Ideas and structure from: NASA *Design and Develop Science Missions* webinar; NASA *CubeSat 101*;
-NASA Goddard *Mission Design Lab*; NASA *Learning Game About Telescopes*; JPL *Concept Maturity Levels* paper;
-CSA *RADARSAT Constellation* game.
+```
+godot --headless --path . -s res://tests/golden_test.gd -- --no-mods        # design maths: 12 of 12
+godot --headless --path . -s res://tests/load_all_test.gd                    # every script and scene loads
+godot --headless --path . -s res://tests/flight_test.gd                      # crises and bots
+godot --headless --path . res://tests/phase_test.tscn -- --no-mods           # game flow
+godot --headless --path . res://tests/commander_test.tscn -- --no-mods       # Commander mode
+godot --headless --path . res://tests/round8_test.tscn -- --no-mods          # lives, tasks, twists, mods, team info
+godot --headless --path . res://tests/autocrew_mission_test.tscn -- --no-mods
+```
 
-Art: menu and lobby artwork by the team (Dev D). Crew portraits: the four cat astronauts by the team's artist
-(`assets/images/roles/`). Sound effects and music: generated from code by the team (`tools/make_sfx.py`), no third-party audio.
-The "Quindar tones" chat beep imitates NASA's Apollo-era radio signalling (2525 Hz / 2475 Hz).
-Fonts: Godot's default font (add any SIL OFL fonts here with their licence).
+Without a terminal: open a test scene in Godot and press **F6**. Every test prints `PASS` lines and `ALL GOOD`.
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the full list and the rules.
 
-**AI assistance:** the team used Claude (Anthropic) to help write code, merge modules, check the maths, balance numbers,
-draft text and build the handbook. Every script has an "AI-assisted" header, every screen says "Made with AI
-assistance", and the main menu has **Credits & AI use**. Full details: `AI_DISCLOSURE.md` (edit `data/credits.json`
-so it is true for your team before you submit).
+## Mods
 
+Add your own instruments, parts, rockets, stations, crises and twists with a `.json` file, no code needed.
+Start from `modding/example_mod.json` and read **[MODDING.md](MODDING.md)**.
+Every laptop in a game must have the same mods.
 
-## Commander mode (default)
+## Documentation
 
-5 people: 4 crew on their laptops plus the **Commander** on the host laptop. Keep the Commander's screen private!
-The crew can't see whether their picks are right; the Commander can, and taps a pick to flag it SWAP. In a crisis the
-crew says which gauges are on ALARM; the Commander taps them into the Gauge Finder and says which cards to play. The crew has
-the clock and can press **HURRY, COMMANDER!**. Print `Commander_Handbook.pdf` for a paper copy.
+| File | For |
+|---|---|
+| [docs/HOW_TO_PLAY.md](docs/HOW_TO_PLAY.md) | players and teachers |
+| [MODDING.md](MODDING.md) | anyone making new content |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | developers: setup, rules, tests |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | developers: how the code fits together |
+| [CHANGELOG.md](CHANGELOG.md) | what changed in each version |
+| [CREDITS.md](CREDITS.md) | sources, art, sound, fonts |
+| [AI_DISCLOSURE.md](AI_DISCLOSURE.md) | how AI was used |
+| [MERGE_NOTES.md](MERGE_NOTES.md) | the Lead's detailed development log |
 
-## Playing on other laptops (read this before sending the game around)
+## Credits and AI use
 
-**Send the built game (`MissionControl.exe`), not the project folder.** If someone opens the project in their own Godot, their Godot version, editor settings and the editor's "Game" tab all change how it behaves. Full screen, for example, can't work inside the editor's Game tab. Every laptop should run **the same build**. A different copy gets refused with a "different version" message.
+Made by **Team Pawstronauts**. Numbers are game-scale and only loosely inspired by real missions; they are **not**
+official NASA data. Sources and assets: **[CREDITS.md](CREDITS.md)**.
 
-1. **Same Wi-Fi network.** School or guest Wi-Fi often blocks laptops from talking to each other ("client isolation"). If it does, turn on a phone hotspot and put every laptop on it.
-2. **First launch on Windows:** if SmartScreen says "Windows protected your PC", click *More info* then *Run anyway* (the game isn't code-signed). When the **firewall** box appears, tick **Private** networks and click *Allow*.
-3. Set the Wi-Fi to **Private**: Windows Settings > Network & internet > Wi-Fi > (your network) > *Private network*. On a "Public" network the firewall blocks the game.
-4. The host reads out the address shown in the lobby. If the crew can't see the host automatically, they type that address. If it still fails, try the "or try" addresses.
-5. Still stuck? Open **Settings > System check** on both laptops and send the reports to the Lead.
+**AI assistance:** we used Claude (Anthropic) to help write code, check the maths, balance numbers, draft text and
+build the handbook. Every script has an "AI-assisted" header, every screen says "Made with AI assistance", and the
+main menu has **Credits & AI use**. Details: **[AI_DISCLOSURE.md](AI_DISCLOSURE.md)**.
+
+## License
+
+*Team: choose a license and add a `LICENSE` file before you publish* (for example MIT for the code). Until then,
+all rights are reserved by the team.
