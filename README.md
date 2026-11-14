@@ -141,10 +141,10 @@ Every laptop in a game must have the same mods.
 
 | File | For |
 |---|---|
-| [docs/HOW_TO_PLAY.md](docs/HOW_TO_PLAY.md) | players and teachers |
+| [HOW_TO_PLAY.md](HOW_TO_PLAY.md) | players and teachers |
 | [MODDING.md](MODDING.md) | anyone making new content |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | developers: setup, rules, tests |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | developers: how the code fits together |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | developers: how the code fits together |
 | [CHANGELOG.md](CHANGELOG.md) | what changed in each version |
 | [CREDITS.md](CREDITS.md) | sources, art, sound, fonts |
 | [AI_DISCLOSURE.md](AI_DISCLOSURE.md) | how AI was used |
