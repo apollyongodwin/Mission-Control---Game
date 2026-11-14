@@ -158,8 +158,3 @@ official NASA data. Sources and assets: **[CREDITS.md](CREDITS.md)**.
 **AI assistance:** we used Claude (Anthropic) to help write code, check the maths, balance numbers, draft text and
 build the handbook. Every script has an "AI-assisted" header, every screen says "Made with AI assistance", and the
 main menu has **Credits & AI use**. Details: **[AI_DISCLOSURE.md](AI_DISCLOSURE.md)**.
-
-## License
-
-*Team: choose a license and add a `LICENSE` file before you publish* (for example MIT for the code). Until then,
-all rights are reserved by the team.
