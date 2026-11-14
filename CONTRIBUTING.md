@@ -2,6 +2,18 @@
 
 Thanks for helping! This page is for the team and anyone who wants to change the game.
 
+## The Team
+Mission Control is made by:
+- Sam Ezra K. Capangpangan
+- Marjah Sheham M. Sarip
+- Yohann P. Domingo
+- Klyne Xyril M. Africano
+- Julliana Arlyn A. Virtudazo
+- Noril Saint Agustin Encabo
+
+### Very Special Mentions
+- **Rihanna Elisse C. Sani**: the character designs were commissioned from and created by her.
+
 ## Setup
 1. Install **Godot 4.7 stable**. Everyone must use exactly this version: the network version check refuses mixed copies.
 2. Clone the repo and open `project.godot` in Godot (**Import**). The first import takes a minute.
