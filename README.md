@@ -50,7 +50,7 @@ a mission patch.
 - **Every failure explains itself:** the debrief says what limited the mission and why.
 - **Variety:** lives, surprise mini-tasks, a random mission twist each game, three difficulties, and mods.
 
-The full player guide is in **[docs/HOW_TO_PLAY.md](docs/HOW_TO_PLAY.md)**.
+The full player guide is in **[HOW_TO_PLAY.md](HOW_TO_PLAY.md)**.
 
 ## Download and play
 
@@ -109,10 +109,9 @@ handbook/      the Commander's Handbook (PDF + its source data)
 modding/       an example mod
 tools/         handbook, sound and medal generators
 tests/         automated tests and screenshot helpers
-docs/          player guide, architecture, history
 ```
 
-More detail: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
+More detail: **[ARCHITECTURE.md](ARCHITECTURE.md)**.
 
 ## Tests
 
